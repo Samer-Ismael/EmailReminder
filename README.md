@@ -2,6 +2,18 @@
 
 This application sends email reminders for user appointments that are scheduled for the next day. The emails are sent using SMTP (Gmail in this case), and the user must configure the database and email settings before running the application.
 
+
+## SendingEmails Application
+
+This application is designed to manage user bookings and send automated email notifications for appointment-related events. Key features include:
+- Sending welcome emails to users upon registering a new booking.
+- Automatically checking for and deleting appointments that are older than one week.
+- Sending reminder emails for appointments scheduled for the next day.
+- A simple frontend interface for managing users, bookings, and appointments.
+
+The application uses a MySQL database for storage and Gmail SMTP for sending emails.
+
+
 ## Prerequisites
 
 Before running the application, you need to set up the following:
