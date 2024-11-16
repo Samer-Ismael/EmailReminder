@@ -19,5 +19,4 @@ public class User {
     private String phone;
     private LocalDate appointment;
 
-    // Getters and setters
 }

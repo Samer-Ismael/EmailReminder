@@ -24,14 +24,17 @@ public class UserController {
         List<User> users = userService.findNextDayAppointments();
         return ResponseEntity.ok(users);
     }
+
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<User>> findUsersByName(@RequestParam String name) {
         List<User> users = userService.findUsersByName(name);
         return ResponseEntity.ok(users);
     }
+
 }
