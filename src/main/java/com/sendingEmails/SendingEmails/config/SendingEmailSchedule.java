@@ -26,8 +26,8 @@ public class SendingEmailSchedule {
         this.userService = userService;
     }
 
-    //@Scheduled(cron = "0 4 23 * * ?") // for testing the app.
-    @Scheduled(cron = "0 0 9 * * ?")  // Runs every day at 9:00 AM
+    @Scheduled(cron = "0 40 14 * * ?") // for testing the app.
+    //@Scheduled(cron = "0 0 9 * * ?")  // Runs every day at 9:00 AM
     public void findUsersWithNextDayAppointments() {
         logger.info("Scheduled task triggered at {}", LocalDateTime.now());
         List<User> users = userService.findNextDayAppointments();
@@ -37,28 +37,36 @@ public class SendingEmailSchedule {
         } else {
             logger.info("Found {} users with appointments for the next day.", users.size());
             for (User user : users) {
-                String emailBody =
-                        "Dear " + user.getName() + ",\n\n" +
-                                "This is a reminder for your appointment with the Doctor on " + user.getAppointment() + ".\n\n" +
-                                "Thank you!\n\n" +
+                StringBuilder emailBodyBuilder = new StringBuilder();
 
-                                "-------------------------------------\n" +
+                // English version
+                emailBodyBuilder.append("Dear ").append(user.getName()).append(",\n\n")
+                        .append("This is a reminder for your appointment with the Doctor on ")
+                        .append(user.getAppointment()).append(" at ").append(user.getTime()).append(".\n\n")
+                        .append("Thank you!\n\n")
+                        .append("-------------------------------------\n");
 
-                                "Hej " + user.getName() + ",\n\n" +
-                                "Det här är en påminnelse om ditt möte med doktorn den " + user.getAppointment() + ".\n\n" +
-                                "Tack!\n\n" +
+                // Swedish version
+                emailBodyBuilder.append("Hej ").append(user.getName()).append(",\n\n")
+                        .append("Det här är en påminnelse om ditt möte med doktorn den ")
+                        .append(user.getAppointment()).append(" klockan ").append(user.getTime()).append(".\n\n")
+                        .append("Tack!\n\n")
+                        .append("-------------------------------------\n");
 
-                                "-------------------------------------\n"+
+                // Somali version
+                emailBodyBuilder.append("Mudane/Maro ").append(user.getName()).append(",\n\n")
+                        .append("Tani waa xusuusin ku saabsan ballantaada dhakhtarka ee ")
+                        .append(user.getAppointment()).append(" saacada ").append(user.getTime()).append(".\n\n")
+                        .append("Mahadsanid!\n\n")
+                        .append("-------------------------------------\n");
 
-                                "Mudane/Maro " + user.getName() + ",\n\n" +
-                                "Tani waa xusuusin ku saabsan ballantaada dhakhtarka ee " + user.getAppointment() + ".\n\n" +
-                                "Mahadsanid!\n\n" +
+                // Arabic version
+                emailBodyBuilder.append("عزيزي ").append(user.getName()).append("،\n\n")
+                        .append("هذه تذكرة بموعدك مع الطبيب في ")
+                        .append(user.getAppointment()).append(" الساعة ").append(user.getTime()).append(".\n\n")
+                        .append("شكراً!\n");
 
-                                "-------------------------------------\n"+
-
-                                "عزيزي " + user.getName() + "،\n\n" +
-                                "هذه تذكرة بموعدك مع الطبيب في " + user.getAppointment() + ".\n\n" +
-                                "شكراً!\n";
+                String emailBody = emailBodyBuilder.toString();
 
                 String email = user.getEmail();
                 String messageSubject = "Appointment Reminder";

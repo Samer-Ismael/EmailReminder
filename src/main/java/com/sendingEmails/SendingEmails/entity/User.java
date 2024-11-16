@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -18,5 +20,6 @@ public class User {
     private String email;
     private String phone;
     private LocalDate appointment;
+    private LocalTime time;
 
 }

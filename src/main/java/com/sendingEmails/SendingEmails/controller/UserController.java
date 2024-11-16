@@ -1,6 +1,7 @@
 package com.sendingEmails.SendingEmails.controller;
 
 import com.sendingEmails.SendingEmails.entity.User;
+import com.sendingEmails.SendingEmails.service.EmailService;
 import com.sendingEmails.SendingEmails.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final EmailService emailService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/next-day-appointments")
@@ -28,6 +31,8 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
+        emailService.sendWelcomeEmail(user);  // Send welcome email
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
