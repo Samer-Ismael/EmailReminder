@@ -22,21 +22,18 @@ public class UserController {
         this.emailService = emailService;
     }
 
-    // Get all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // Get user by ID
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    // Add a new user
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
@@ -44,7 +41,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
-    // Update a user
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         User existingUser = userService.getUserById(id);
@@ -63,7 +59,6 @@ public class UserController {
         return ResponseEntity.ok(savedUser);
     }
 
-    // Delete a user by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         if (!userService.deleteUserById(id)) {
@@ -72,14 +67,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    // Search users by name
     @GetMapping("/search")
     public ResponseEntity<List<User>> findUsersByName(@RequestParam String name) {
         List<User> users = userService.findUsersByName(name);
         return ResponseEntity.ok(users);
     }
 
-    // Get users with next-day appointments
     @GetMapping("/next-day-appointments")
     public ResponseEntity<List<User>> getNextDayAppointments() {
         List<User> users = userService.findNextDayAppointments();
