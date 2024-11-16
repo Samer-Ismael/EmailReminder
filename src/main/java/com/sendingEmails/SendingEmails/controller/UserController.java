@@ -22,23 +22,67 @@ public class UserController {
         this.emailService = emailService;
     }
 
-    @GetMapping("/next-day-appointments")
-    public ResponseEntity<List<User>> getNextDayAppointments() {
-        List<User> users = userService.findNextDayAppointments();
+    // Get all users
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    // Get user by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    // Add a new user
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
-        emailService.sendWelcomeEmail(user);  // Send welcome email
-
+        emailService.sendWelcomeEmail(user); // Send welcome email
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
+    // Update a user
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        User existingUser = userService.getUserById(id);
+        if (existingUser == null) {
+            return ResponseEntity.noContent().build();
+        }
+
+        // Update fields
+        existingUser.setName(updatedUser.getName());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPhone(updatedUser.getPhone());
+        existingUser.setAppointment(updatedUser.getAppointment());
+        existingUser.setTime(updatedUser.getTime());
+
+        User savedUser = userService.updateUser(existingUser);
+        return ResponseEntity.ok(savedUser);
+    }
+
+    // Delete a user by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (!userService.deleteUserById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    // Search users by name
     @GetMapping("/search")
     public ResponseEntity<List<User>> findUsersByName(@RequestParam String name) {
         List<User> users = userService.findUsersByName(name);
+        return ResponseEntity.ok(users);
+    }
+
+    // Get users with next-day appointments
+    @GetMapping("/next-day-appointments")
+    public ResponseEntity<List<User>> getNextDayAppointments() {
+        List<User> users = userService.findNextDayAppointments();
         return ResponseEntity.ok(users);
     }
 
