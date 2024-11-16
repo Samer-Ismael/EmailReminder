@@ -15,7 +15,7 @@ import java.util.List;
 public class CleaningDatabaseSchedule {
 
     private final UserRepository userRepository;
-    private static final Logger logger = LoggerFactory.getLogger(SendingEmailSchedule.class);
+    private static final Logger logger = LoggerFactory.getLogger(CleaningDatabaseSchedule.class);
 
     @Autowired
     public CleaningDatabaseSchedule(UserRepository userRepository) {
