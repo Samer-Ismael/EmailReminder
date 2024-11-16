@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>User Management System</h1>
+    </header>
+
+    <main>
+        <!-- Section for fetching next-day appointments -->
+        <section class="next-day-appointments">
+            <h2>Next Day Appointments</h2>
+            <button id="fetchAppointmentsBtn">Fetch Tomorrow's Appointments</button>
+            <ul id="appointmentsList"></ul>
+        </section>
+
+        <!-- Section for fetching today’s appointments -->
+        <section class="today-appointments">
+            <h2>Today's Appointments</h2>
+            <button id="fetchTodayAppointmentsBtn">Fetch Today's Appointments</button>
+            <ul id="todayAppointmentsList"></ul>
+        </section>
+
+        <!-- Section for searching users -->
+        <section class="search-user">
+            <h2>Search User by Name</h2>
+            <input type="text" id="searchName" placeholder="Enter name">
+            <button id="searchBtn">Search</button>
+            <ul id="searchResults"></ul>
+        </section>
+
+        <!-- Section for adding a new user -->
+        <section class="add-user">
+            <h2>Add New User</h2>
+            <form id="addUserForm">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="phone" placeholder="Phone" required>
+                <input type="date" id="appointment" placeholder="Appointment Date" required>
+                <input type="time" id="time" placeholder="Time" required>
+                <button type="submit">Add User</button>
+            </form>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

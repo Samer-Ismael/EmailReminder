@@ -79,4 +79,9 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/today")
+    public ResponseEntity<List<User>> getTodayAppointments() {
+        List<User> users = userService.findTodayAppointments();
+        return ResponseEntity.ok(users);
+    }
 }

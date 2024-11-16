@@ -37,6 +37,11 @@ public class UserService {
         return userRepository.findAllByAppointmentNextDay(nextDay);
     }
 
+    public List<User> findTodayAppointments() {
+        LocalDate today = LocalDate.now();
+        return userRepository.findAllByAppointmentNextDay(today);
+    }
+
     public User addUser(User user) {
         validateUser(user); // Ensure all required fields are provided
         return userRepository.save(user);
