@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByName(String name);
 
+    @Query("SELECT u FROM User u WHERE u.appointment < :oneWeekAgo")
+    List<User> findUsersWithOldAppointments(@Param("oneWeekAgo") LocalDate oneWeekAgo);
 }

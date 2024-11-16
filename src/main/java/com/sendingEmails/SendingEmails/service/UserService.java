@@ -78,4 +78,9 @@ public class UserService {
             throw new IllegalArgumentException("Appointment date is required.");
         }
     }
+
+    public List<User> getUsersWithOldAppointments() {
+        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);  // Get the date one week ago
+        return userRepository.findUsersWithOldAppointments(oneWeekAgo);
+    }
 }
