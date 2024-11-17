@@ -16,15 +16,21 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Check if the JAR file exists in the current directory
+if [ ! -f "$JAR_NAME" ]; then
+    echo "JAR file $JAR_NAME not found. Please make sure the JAR file is in the current directory."
+    exit 1
+fi
+
 print_message "Starting setup for $APP_NAME service..."
 
 # Step 1: Create application directory
 print_message "Creating application directory at $INSTALL_DIR..."
 mkdir -p "$INSTALL_DIR"
 
-# Step 2: Copy the JAR file to the installation directory
-print_message "Copying JAR file to $INSTALL_DIR..."
-cp "$JAR_NAME" "$INSTALL_DIR/"
+# Step 2: Move the JAR file to the installation directory
+print_message "Moving JAR file to $INSTALL_DIR..."
+mv "$JAR_NAME" "$INSTALL_DIR/"
 
 # Step 3: Create systemd service file
 print_message "Creating systemd service file at $SERVICE_FILE..."
