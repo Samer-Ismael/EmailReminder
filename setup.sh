@@ -4,7 +4,7 @@ APP_NAME="sending-emails"
 JAR_NAME="SendingEmails-0.0.1-SNAPSHOT.jar"
 INSTALL_DIR="/opt/$APP_NAME"
 SERVICE_FILE="/etc/systemd/system/$APP_NAME.service"
-JAR_FILE_PATH="./$JAR_NAME"  # Adjust this path if the JAR file is not in the same directory
+JAR_FILE_PATH="./target/$JAR_NAME"  # JAR file is in the target directory
 
 # Function to print messages
 function print_message() {
