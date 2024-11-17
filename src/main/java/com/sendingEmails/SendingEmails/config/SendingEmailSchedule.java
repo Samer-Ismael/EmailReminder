@@ -37,36 +37,7 @@ public class SendingEmailSchedule {
         } else {
             logger.info("Found {} users with appointments for the next day.", users.size());
             for (User user : users) {
-                StringBuilder emailBodyBuilder = new StringBuilder();
-
-                // English version
-                emailBodyBuilder.append("Dear ").append(user.getName()).append(",\n\n")
-                        .append("This is a reminder for your appointment with the Doctor on ")
-                        .append(user.getAppointment()).append(" at ").append(user.getTime()).append(".\n\n")
-                        .append("Thank you!\n\n")
-                        .append("-------------------------------------\n");
-
-                // Swedish version
-                emailBodyBuilder.append("Hej ").append(user.getName()).append(",\n\n")
-                        .append("Det här är en påminnelse om ditt möte med doktorn den ")
-                        .append(user.getAppointment()).append(" klockan ").append(user.getTime()).append(".\n\n")
-                        .append("Tack!\n\n")
-                        .append("-------------------------------------\n");
-
-                // Somali version
-                emailBodyBuilder.append("Mudane/Maro ").append(user.getName()).append(",\n\n")
-                        .append("Tani waa xusuusin ku saabsan ballantaada dhakhtarka ee ")
-                        .append(user.getAppointment()).append(" saacada ").append(user.getTime()).append(".\n\n")
-                        .append("Mahadsanid!\n\n")
-                        .append("-------------------------------------\n");
-
-                // Arabic version
-                emailBodyBuilder.append("عزيزي ").append(user.getName()).append("،\n\n")
-                        .append("هذه تذكرة بموعدك مع الطبيب في ")
-                        .append(user.getAppointment()).append(" الساعة ").append(user.getTime()).append(".\n\n")
-                        .append("شكراً!\n");
-
-                String emailBody = emailBodyBuilder.toString();
+                String emailBody = user.remindTheUser();
 
                 String email = user.getEmail();
                 String messageSubject = "Appointment Reminder";
