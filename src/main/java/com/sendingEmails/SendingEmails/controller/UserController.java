@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -89,5 +91,23 @@ public class UserController {
     public ResponseEntity<List<User>> getUsersWithOldAppointments() {
         List<User> users = userService.getUsersWithOldAppointments();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/appointments")
+    public ResponseEntity<List<User>> getUsersByAppointment(@RequestParam String date) {
+        try {
+            // Parse the date from the request parameter
+            LocalDate appointmentDate = LocalDate.parse(date);
+
+            // Fetch users with the given appointment date
+            List<User> users = userService.getUsersByAppointmentDate(appointmentDate);
+
+            // Return the users in the response
+            return ResponseEntity.ok(users);
+
+        } catch (DateTimeParseException e) {
+            // Handle invalid date format
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 }

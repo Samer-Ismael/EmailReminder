@@ -42,10 +42,34 @@ async function searchUserByName() {
         const users = await response.json();
         const searchResults = document.getElementById("searchResults");
         searchResults.innerHTML = users.length > 0
-            ? users.map(user => `<li>${user.name} - ${user.email}</li>`).join("")
+            ? users.map(user => `<li>${user.name} - ${user.email} - ${user.appointment} at ${user.time} </li>`).join("")
             : "<li>No users found with that name.</li>";
     } catch (error) {
         console.error("Error searching for users:", error);
+    }
+}
+
+// Event listener for searching users by appointment date
+document.getElementById("searchByDateBtn").addEventListener("click", searchUsersByDate);
+
+// Search users by appointment date
+async function searchUsersByDate() {
+    const date = document.getElementById("searchDate").value;
+    if (!date) {
+        alert("Please select a date.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/appointments?date=${date}`);
+        const users = await response.json();
+        const searchByDateResults = document.getElementById("searchByDateResults");
+
+        searchByDateResults.innerHTML = users.length > 0
+            ? users.map(user => `<li>${user.name} - ${user.appointment} at ${user.time}</li>`).join("")
+            : "<li>No users found for the selected date.</li>";
+    } catch (error) {
+        console.error("Error searching for users by date:", error);
     }
 }
 

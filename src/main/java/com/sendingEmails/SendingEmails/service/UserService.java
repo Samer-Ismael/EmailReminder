@@ -83,4 +83,9 @@ public class UserService {
         LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);  // Get the date one week ago
         return userRepository.findUsersWithOldAppointments(oneWeekAgo);
     }
+
+    public List<User> getUsersByAppointmentDate (LocalDate appointment){
+        return userRepository.findAllByAppointmentDate(appointment);
+    }
+
 }
