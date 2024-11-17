@@ -26,11 +26,9 @@ public class CleaningDatabaseSchedule {
     @Scheduled(cron = "0 0 13 * * ?")
     public void cleanOldAppointments() {
         LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
-
         List<User> usersToDelete = userRepository.findUsersWithOldAppointments(oneWeekAgo);
 
         if (!usersToDelete.isEmpty()) {
-
             for (User user : usersToDelete) {
                 long id = user.getId();
                 userRepository.deleteById(id);

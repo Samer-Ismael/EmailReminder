@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
-        emailService.sendWelcomeEmail(user); // Send welcome email
+        emailService.sendWelcomeEmail(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
@@ -50,7 +50,6 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
 
-        // Update fields
         existingUser.setName(updatedUser.getName());
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setPhone(updatedUser.getPhone());
@@ -96,17 +95,11 @@ public class UserController {
     @GetMapping("/appointments")
     public ResponseEntity<List<User>> getUsersByAppointment(@RequestParam String date) {
         try {
-            // Parse the date from the request parameter
             LocalDate appointmentDate = LocalDate.parse(date);
-
-            // Fetch users with the given appointment date
             List<User> users = userService.getUsersByAppointmentDate(appointmentDate);
-
-            // Return the users in the response
             return ResponseEntity.ok(users);
 
         } catch (DateTimeParseException e) {
-            // Handle invalid date format
             return ResponseEntity.badRequest().body(null);
         }
     }
