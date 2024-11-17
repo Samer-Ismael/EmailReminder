@@ -4,6 +4,7 @@ APP_NAME="sending-emails"
 JAR_NAME="SendingEmails-0.0.1-SNAPSHOT.jar"
 INSTALL_DIR="/opt/$APP_NAME"
 SERVICE_FILE="/etc/systemd/system/$APP_NAME.service"
+JAR_FILE_PATH="./$JAR_NAME"  # Adjust this path if the JAR file is not in the same directory
 
 # Function to print messages
 function print_message() {
@@ -16,9 +17,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Check if the JAR file exists in the current directory
-if [ ! -f "$JAR_NAME" ]; then
-    echo "JAR file $JAR_NAME not found. Please make sure the JAR file is in the current directory."
+# Check if the JAR file exists in the specified path
+if [ ! -f "$JAR_FILE_PATH" ]; then
+    echo "JAR file $JAR_FILE_PATH not found. Please make sure the JAR file is at the specified location."
     exit 1
 fi
 
@@ -30,7 +31,7 @@ mkdir -p "$INSTALL_DIR"
 
 # Step 2: Move the JAR file to the installation directory
 print_message "Moving JAR file to $INSTALL_DIR..."
-mv "$JAR_NAME" "$INSTALL_DIR/"
+mv "$JAR_FILE_PATH" "$INSTALL_DIR/"
 
 # Step 3: Create systemd service file
 print_message "Creating systemd service file at $SERVICE_FILE..."
