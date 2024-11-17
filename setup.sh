@@ -17,23 +17,27 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Check if the JAR file exists in the specified path
+# Step 1: Build the project using Maven
+print_message "Building the project using Maven..."
+mvn clean install
+
+# Check if the JAR file exists after the build
 if [ ! -f "$JAR_FILE_PATH" ]; then
-    echo "JAR file $JAR_FILE_PATH not found. Please make sure the JAR file is at the specified location."
+    echo "JAR file $JAR_FILE_PATH not found. Maven build may have failed."
     exit 1
 fi
 
 print_message "Starting setup for $APP_NAME service..."
 
-# Step 1: Create application directory
+# Step 2: Create application directory
 print_message "Creating application directory at $INSTALL_DIR..."
 mkdir -p "$INSTALL_DIR"
 
-# Step 2: Move the JAR file to the installation directory
+# Step 3: Move the JAR file to the installation directory
 print_message "Moving JAR file to $INSTALL_DIR..."
 mv "$JAR_FILE_PATH" "$INSTALL_DIR/"
 
-# Step 3: Create systemd service file
+# Step 4: Create systemd service file
 print_message "Creating systemd service file at $SERVICE_FILE..."
 cat <<EOL >"$SERVICE_FILE"
 [Unit]
@@ -53,14 +57,14 @@ RestartSec=5
 WantedBy=multi-user.target
 EOL
 
-# Step 4: Reload systemd and enable the service
+# Step 5: Reload systemd and enable the service
 print_message "Reloading systemd daemon..."
 systemctl daemon-reload
 
 print_message "Enabling $APP_NAME service to start on boot..."
 systemctl enable "$APP_NAME"
 
-# Step 5: Start the service
+# Step 6: Start the service
 print_message "Starting $APP_NAME service..."
 systemctl start "$APP_NAME"
 
