@@ -44,19 +44,13 @@ public class SendingEmailSchedule {
                 String messageSubject = "Appointment Reminder";
 
                 try {
-                    // Create a MimeMessage
                     MimeMessage mimeMessage = mailSender.createMimeMessage();
                     MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
-                    // Set "To", "Subject", and "Text"
                     helper.setTo(email);
                     helper.setSubject(messageSubject);
-                    helper.setText(emailBody, false); // 'false' for plain text
-
-                    // Set "From" with friendly name
-                    helper.setFrom("noreply@mail.doctor.se", "doctor");
-
-                    // Send email
+                    helper.setText(emailBody, false);
+                    helper.setFrom("", "doctor");
                     mailSender.send(mimeMessage);
                     logger.info("Email sent successfully to {}", user.getName());
                 } catch (Exception e) {
