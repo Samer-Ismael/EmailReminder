@@ -1,9 +1,11 @@
 package com.sendingEmails.SendingEmails.service;
 
 import com.sendingEmails.SendingEmails.entity.User;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,12 +25,25 @@ public class EmailService {
         String emailBody = user.welcomeTheUser();
         String subject = "Welcome to Our Appointment System";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(user.getEmail());
-        message.setSubject(subject);
-        message.setText(emailBody);
+        try {
+            // Create a MimeMessage
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
-        mailSender.send(message);
+            // Set "To", "Subject", and "Text"
+            helper.setTo(user.getEmail());
+            helper.setSubject(subject);
+            helper.setText(emailBody, false);  // 'false' means plain text
+
+            // Set "From" with friendly name
+            helper.setFrom("noreply@mail.docktor.se", "Doctor");
+
+            // Send the email
+            mailSender.send(mimeMessage);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
+
 }
 

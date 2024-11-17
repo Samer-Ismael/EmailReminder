@@ -2,11 +2,13 @@ package com.sendingEmails.SendingEmails.config;
 
 import com.sendingEmails.SendingEmails.entity.User;
 import com.sendingEmails.SendingEmails.service.UserService;
+import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
@@ -38,21 +40,28 @@ public class SendingEmailSchedule {
             logger.info("Found {} users with appointments for the next day.", users.size());
             for (User user : users) {
                 String emailBody = user.remindTheUser();
-
                 String email = user.getEmail();
                 String messageSubject = "Appointment Reminder";
 
                 try {
-                    SimpleMailMessage message = new SimpleMailMessage();
-                    message.setTo(email);
-                    message.setSubject(messageSubject);
-                    message.setText(emailBody);
-                    mailSender.send(message);
+                    // Create a MimeMessage
+                    MimeMessage mimeMessage = mailSender.createMimeMessage();
+                    MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+
+                    // Set "To", "Subject", and "Text"
+                    helper.setTo(email);
+                    helper.setSubject(messageSubject);
+                    helper.setText(emailBody, false); // 'false' for plain text
+
+                    // Set "From" with friendly name
+                    helper.setFrom("noreply@mail.doctor.se", "doctor");
+
+                    // Send email
+                    mailSender.send(mimeMessage);
                     logger.info("Email sent successfully to {}", user.getName());
                 } catch (Exception e) {
                     logger.error("Failed to send email to {}: {}", user.getName(), e.getMessage(), e);
                 }
-
             }
         }
     }
