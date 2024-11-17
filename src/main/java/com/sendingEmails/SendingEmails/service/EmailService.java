@@ -28,10 +28,11 @@ public class EmailService {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+
             helper.setTo(user.getEmail());
             helper.setSubject(subject);
             helper.setText(emailBody, false);
-            helper.setFrom("", "Doctor");
+            helper.setFrom("noreply@mail.docktor.se", "Doctor");
             mailSender.send(mimeMessage);
         } catch (Exception e) {
             System.out.println(e);

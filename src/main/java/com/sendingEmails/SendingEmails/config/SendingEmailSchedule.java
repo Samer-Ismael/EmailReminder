@@ -50,7 +50,7 @@ public class SendingEmailSchedule {
                     helper.setTo(email);
                     helper.setSubject(messageSubject);
                     helper.setText(emailBody, false);
-                    helper.setFrom("", "doctor");
+                    helper.setFrom("noreply@mail.doctor.se", "doctor");
                     mailSender.send(mimeMessage);
                     logger.info("Email sent successfully to {}", user.getName());
                 } catch (Exception e) {
