@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/users";
+const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8080/users`;
 
 // Event listeners
 document.getElementById("fetchAppointmentsBtn").addEventListener("click", fetchNextDayAppointments);
