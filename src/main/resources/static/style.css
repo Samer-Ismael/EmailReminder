@@ -1,159 +1,156 @@
-/* General body styling */
-body {
-    font-family: 'Roboto', sans-serif;
+/* General Reset and Base Styling */
+* {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #3e2723, #6d4c41);  /* Dark brown gradient */
-    color: #e0e0e0;  /* Very light gray text for good readability */
+    box-sizing: border-box;
 }
 
-/* Container for the main content */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #4b2e2a; /* Dark Brown */
+    color: #f5f5f5; /* Light Text Color for Contrast */
+    padding: 20px;
+}
+
 .container {
-    max-width: 1100px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #2c2c2c;  /* Dark gray background for high contrast */
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);  /* Subtle shadow */
-    border-radius: 12px;
+    max-width: 1200px;
+    margin: auto;
+    background: #fff; /* White for Card Backgrounds */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Header style */
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 36px;
-    color: #ffffff;  /* White color for header text */
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 2rem;
+    color: #3e2b2b;; /* Light Beige to Match Brown */
+    border-bottom: 2px solid #e6cbbf;
+    padding-bottom: 10px;
 }
 
-/* Card sections */
-section {
-    margin-bottom: 30px;
-    padding: 20px;
-    border-radius: 12px;
-    background: #3d3d3d;  /* Dark gray for sections */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-}
-
-/* Section titles */
-h2 {
-    font-size: 26px;
-    color: #f1f1f1;  /* Very light gray for better contrast in section titles */
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-/* Buttons style */
-button {
-    background: #6d4c41;  /* Soft brown button */
-    color: #fff;  /* White text on buttons */
-    border: none;
-    padding: 12px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease, transform 0.3s ease;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-button:hover {
-    background: #5d4037;  /* Darker brown for hover */
-    transform: scale(1.05);  /* Slightly enlarge on hover */
-}
-
-button:active {
-    background: #4e342e;  /* Even darker brown for active state */
-    transform: scale(0.98);  /* Slightly shrink on click */
-}
-
-/* Input fields style */
-input {
-    padding: 14px;
-    margin: 12px 0;
-    width: 97%;
-    border: 1px solid #777;  /* Darker border for inputs */
-    border-radius: 12px;
-    font-size: 16px;
-    background: #444;  /* Dark gray background for input fields */
-    color: #fff;  /* White text for input fields */
-    transition: border-color 0.3s ease;
-}
-
-input:focus {
-    border-color: #6d4c41;  /* Focus border in soft brown */
-    outline: none;
-}
-
-/* Style for lists */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: #555;  /* Darker gray for list items */
-    padding: 15px;
-    margin: 8px 0;
-    border-radius: 12px;
-    font-size: 16px;
-    color: #fff;  /* White text for list items */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-}
-
-/* Form layout */
-form {
-    display: flex;
-    flex-direction: column;
+/* Main Content Styling */
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Form button */
-form button {
-    align-self: center;
-    width: 200px;
-    background: #6d4c41;
-    font-size: 18px;
-    padding: 12px;
-    border-radius: 50px;
+/* Card Styling */
+.card {
+    background: #fff; /* White for Contrast */
+    border: 1px solid #d8c3bf; /* Muted Beige Border */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #4b2e2a; /* Matching Dark Brown */
+}
+
+.card button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff; /* White Text */
+    background: #805a48; /* Warm Muted Brown */
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card button:hover {
+    background: #5f3e30; /* Darker Shade of Brown */
+}
+
+.card ul {
+    list-style: none;
+    margin-top: 15px;
+    color: #3e2b2b;
+}
+
+.card ul li {
+    padding: 8px 10px;
+    background: #f1f1f1; /* Light Background for Items */
+    border: 1px solid #d8c3bf; /* Match Border to Card */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #3e2b2b; /* Light Text to Match Background */
+}
+
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d8c3bf;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-group input:focus {
+    border-color: #805a48; /* Brown to Match Buttons */
+}
+
+form button {
+    align-self: flex-start;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background: #805a48; /* Warm Muted Brown */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 form button:hover {
-    background: #5d4037;
+    background: #5f3e30; /* Darker Shade */
 }
 
-/* Small screen / Mobile responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        max-width: 100%;
+    .main-content {
+        grid-template-columns: 1fr;
     }
 
-    h1 {
-        font-size: 30px;
+    header h1 {
+        font-size: 1.8rem;
     }
 
-    h2 {
-        font-size: 24px;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-
-    input {
-        font-size: 14px;
-    }
-
-    section {
-        padding: 15px;
+    .card h2 {
+        font-size: 1.3rem;
     }
 }

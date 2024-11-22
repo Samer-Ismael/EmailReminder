@@ -12,46 +12,56 @@
         <h1>User Management System</h1>
     </header>
 
-    <main>
-        <!-- Section for fetching next-day appointments -->
-        <section class="next-day-appointments">
+    <main class="main-content">
+        <section class="card">
             <h2>Next Day Appointments</h2>
             <button id="fetchAppointmentsBtn">Fetch Tomorrow's Appointments</button>
             <ul id="appointmentsList"></ul>
         </section>
 
-        <!-- Section for searching users by appointment date -->
-        <section class="search-by-date">
+        <section class="card">
             <h2>Search Users by Appointment Date</h2>
             <input type="date" id="searchDate" placeholder="Select appointment date">
             <button id="searchByDateBtn">Search</button>
             <ul id="searchByDateResults"></ul>
         </section>
 
-        <!-- Section for fetching today’s appointments -->
-        <section class="today-appointments">
+        <section class="card">
             <h2>Today's Appointments</h2>
             <button id="fetchTodayAppointmentsBtn">Fetch Today's Appointments</button>
             <ul id="todayAppointmentsList"></ul>
         </section>
 
-        <!-- Section for searching users -->
-        <section class="search-user">
+        <section class="card">
             <h2>Search User by Name</h2>
             <input type="text" id="searchName" placeholder="Enter name">
             <button id="searchBtn">Search</button>
             <ul id="searchResults"></ul>
         </section>
 
-        <!-- Section for adding a new user -->
-        <section class="add-user">
+        <section class="card">
             <h2>Add New User</h2>
             <form id="addUserForm">
-                <input type="text" id="name" placeholder="Name" required>
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="text" id="phone" placeholder="Phone" required>
-                <input type="date" id="appointment" placeholder="Appointment Date" required>
-                <input type="time" id="time" placeholder="Time" required>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" placeholder="Phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointment">Appointment Date:</label>
+                    <input type="date" id="appointment" placeholder="Appointment Date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" placeholder="Time" required>
+                </div>
                 <button type="submit">Add User</button>
             </form>
         </section>
