@@ -10,7 +10,7 @@ public class SendingEmailsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SendingEmailsApplication.class, args);
-		openBrowser("http://localhost:8080");
+		openBrowser("http://localhost:8090");
 
 	}
 
