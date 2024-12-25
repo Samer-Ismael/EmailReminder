@@ -14,8 +14,8 @@ import java.util.List;
 @Component
 public class CleaningDatabaseSchedule {
 
-    private final UserRepository userRepository;
     private static final Logger logger = LoggerFactory.getLogger(CleaningDatabaseSchedule.class);
+    private final UserRepository userRepository;
 
     @Autowired
     public CleaningDatabaseSchedule(UserRepository userRepository) {

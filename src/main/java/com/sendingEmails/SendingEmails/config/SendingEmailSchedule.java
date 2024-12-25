@@ -6,19 +6,18 @@ import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 public class SendingEmailSchedule {
-    private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(SendingEmailSchedule.class);
-
+    private final UserService userService;
     @Autowired
     private JavaMailSender mailSender;
 
