@@ -166,31 +166,3 @@ async function deleteUserById() {
         deleteResults.innerHTML = "<li>An error occurred. Please try again later.</li>";
     }
 }
-document.getElementById('emailConfigBtn').addEventListener('click', function() {
-    document.getElementById('emailConfigPopup').style.display = 'block';
-});
-
-document.getElementById('closePopupBtn').addEventListener('click', function() {
-    document.getElementById('emailConfigPopup').style.display = 'none';
-});
-
-document.getElementById('emailConfigForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    fetch('/api/config/update', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById('emailConfigPopup').style.display = 'none'; // Close popup
-    })
-    .catch(error => console.error('Error:', error));
-});
