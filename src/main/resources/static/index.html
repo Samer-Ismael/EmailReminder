@@ -72,9 +72,30 @@
                 <button type="submit">Add User</button>
             </form>
         </section>
+
+        <!-- Email Configuration Button -->
+        <section class="card">
+            <h2>Email Configuration</h2>
+            <button id="emailConfigBtn">Configure Email</button>
+        </section>
     </main>
 </div>
 
+<!-- Email Configuration Popup -->
+<div id="emailConfigPopup" class="popup">
+    <form id="emailConfigForm">
+        <div class="form-group">
+            <label for="username">Email:</label>
+            <input type="email" id="username" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Save</button>
+        <button type="button" id="closePopupBtn">Cancel</button>
+    </form>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
