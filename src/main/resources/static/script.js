@@ -1,12 +1,10 @@
 const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8090/users`;
 
-// Event listeners
 document.getElementById("fetchAppointmentsBtn").addEventListener("click", fetchNextDayAppointments);
 document.getElementById("fetchTodayAppointmentsBtn").addEventListener("click", fetchTodayAppointments);
 document.getElementById("searchBtn").addEventListener("click", searchUserByName);
 document.getElementById("addUserForm").addEventListener("submit", addUser);
 
-// Fetch next day appointments
 async function fetchNextDayAppointments() {
     try {
         const response = await fetch(`${API_BASE_URL}/next-day-appointments`);
@@ -27,7 +25,6 @@ async function fetchNextDayAppointments() {
     }
 }
 
-// Fetch today appointments
 async function fetchTodayAppointments() {
     try {
         const response = await fetch(`${API_BASE_URL}/today`);
@@ -48,7 +45,6 @@ async function fetchTodayAppointments() {
     }
 }
 
-// Search users by name
 async function searchUserByName() {
     const name = document.getElementById("searchName").value;
     try {
@@ -70,10 +66,8 @@ async function searchUserByName() {
     }
 }
 
-// Event listener for searching users by appointment date
 document.getElementById("searchByDateBtn").addEventListener("click", searchUsersByDate);
 
-// Search users by appointment date
 async function searchUsersByDate() {
     const date = document.getElementById("searchDate").value;
     if (!date) {
@@ -101,7 +95,6 @@ async function searchUsersByDate() {
     }
 }
 
-// Add new user
 async function addUser(event) {
     event.preventDefault();
     const name = document.getElementById("name").value;
@@ -129,10 +122,8 @@ async function addUser(event) {
     }
 }
 
-// Event listener for delete button
 document.getElementById("deleteBtn").addEventListener("click", deleteUserById);
 
-// Delete user by ID
 async function deleteUserById() {
     const id = document.getElementById("deleteId").value.trim();
     const deleteResults = document.getElementById("deleteResults");
@@ -143,15 +134,12 @@ async function deleteUserById() {
     }
 
     try {
-        // Send DELETE request
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: "DELETE",
         });
 
-        // Check the response status
         if (response.ok) {
             deleteResults.innerHTML = `<li>User with ID ${id} has been deleted successfully.</li>`;
-            // Optionally remove from the DOM if the user was listed
             const userElement = document.getElementById(`user-${id}`);
             if (userElement) {
                 userElement.remove();
